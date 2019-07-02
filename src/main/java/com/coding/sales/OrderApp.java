@@ -1,7 +1,19 @@
 package com.coding.sales;
 
+import com.coding.card.Card;
+import com.coding.card.service.CardService;
+import com.coding.member.Member;
+import com.coding.member.service.MemberService;
 import com.coding.sales.input.OrderCommand;
+import com.coding.sales.output.DiscountItemRepresentation;
+import com.coding.sales.output.OrderItemRepresentation;
 import com.coding.sales.output.OrderRepresentation;
+import com.coding.sales.output.PaymentRepresentation;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  * 销售系统的主入口
@@ -32,8 +44,38 @@ public class OrderApp {
 
     OrderRepresentation checkout(OrderCommand command) {
         OrderRepresentation result = null;
+        MemberService memberService = new MemberService();
+        CardService cardService = new CardService();
 
-        //TODO: 请完成需求指定的功能
+        //获取用户信息
+        Member member = memberService.getMemberInfoByMemberId(command.getMemberId());
+        //获取当前用户卡信息
+        Card card = cardService.getCardInfoByCardType(member.getMemberLevel());
+        //获取本次消费新增积分
+        int memberPointsIncreased = 0;
+        //获取新增之后用户积分数
+        int memberPoints = 0;
+        //获取消费后用户卡信息
+        Card finalCardInfo = cardService.getCardInfoByPoint(memberPoints);
+        //获取订单明细
+        List<OrderItemRepresentation> orderItems =  new ArrayList<>();
+        //获取订单总金额
+        BigDecimal totalPrice = new BigDecimal(0);
+        //获取优惠明细
+        List<DiscountItemRepresentation> discount = new ArrayList<>();
+        //获取优惠总金额
+        BigDecimal totalDiscountPrice = new BigDecimal(0);
+        //获取应收金额
+        BigDecimal receivables = new BigDecimal(0);
+        //获取付款记录
+        List<PaymentRepresentation> payments = new ArrayList<>();
+        //获取付款使用的打折券
+        List<String> discountCards = new ArrayList<>();
+
+        result = new OrderRepresentation(command.getOrderId(),new Date(),member.getMemberId(),member.getMemberName(),member.getMemberLevel(),
+                finalCardInfo.getCardType(),memberPointsIncreased,memberPoints,orderItems,totalPrice,discount,totalDiscountPrice,receivables,payments,discountCards);
+
+
 
         return result;
     }
