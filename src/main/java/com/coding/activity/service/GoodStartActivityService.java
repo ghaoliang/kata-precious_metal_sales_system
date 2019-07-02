@@ -5,6 +5,7 @@ import com.coding.sales.output.OrderItemRepresentation;
 import com.coding.utils.Constants;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,7 +32,7 @@ public class GoodStartActivityService {
     public BigDecimal getDiscountMoney(OrderItemRepresentation orderItemRepresentation, Product product, List<String> discountList){
         BigDecimal discountMoney = new BigDecimal(0);
         if(discountList.contains(product.getDiscount())){
-            discountMoney = orderItemRepresentation.getSubTotal().multiply(new BigDecimal(1).subtract(discountMap.get(product.getDiscount())));
+            discountMoney = orderItemRepresentation.getSubTotal().multiply(new BigDecimal(1).subtract(discountMap.get(product.getDiscount()))).setScale(2, RoundingMode.HALF_UP);
         }
 
         if(product.getFullPurchase() != null && product.getFullPurchase().length > 0){
