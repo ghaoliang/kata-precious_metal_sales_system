@@ -9,6 +9,9 @@ import static org.junit.Assert.assertEquals;
 
 public class MemberInitTest {
 
+    /**
+     * 测试通过会员服务根据会员卡号获取会员信息
+     */
     @Test
     public void getMemberInfo(){
         MemberService memberService = new MemberService();
