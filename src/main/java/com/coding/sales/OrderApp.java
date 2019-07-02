@@ -63,9 +63,9 @@ public class OrderApp {
         //获取优惠明细
         List<DiscountItemRepresentation> discount = new ArrayList<>();
         //获取付款使用的打折券
-        List<String> discountCards = new ArrayList<>();
+        List<String> discountCards = command.getDiscounts();
         //获取优惠总金额
-        BigDecimal totalDiscountPrice = new BigDecimal(0);
+        BigDecimal totalDiscountPrice = orderService.getOrderDiscountPrice(discount);
         //获取应收金额
         BigDecimal receivables = totalPrice.subtract(totalDiscountPrice);
         //获取付款记录
