@@ -61,7 +61,7 @@ public class GoodStartActivityService {
             }else if(Constants.FULL_1000_PURCHASE_10.equals(fullPurchase) && totalPrice.compareTo(new BigDecimal(1000))!= -1){
                 discountMoney = discountMoney.compareTo(new BigDecimal(10))!= -1 ? discountMoney : new BigDecimal(10);
             }else if(Constants.FULL_3_PURCHASE_HALF.equals(fullPurchase) && num.compareTo(new BigDecimal(3))!= -1){
-                discountMoney = discountMoney.compareTo(totalPrice.divide(new BigDecimal(2))) != -1 ? discountMoney : totalPrice.divide(new BigDecimal(2));
+                discountMoney = discountMoney.compareTo(orderItemRepresentation.getPrice().divide(new BigDecimal(2))) != -1 ? discountMoney : orderItemRepresentation.getPrice().divide(new BigDecimal(2));
             }else if(Constants.FULL_3_DELIVER_1.equals(fullPurchase) && num.compareTo(new BigDecimal(4))!= -1){
                 discountMoney = discountMoney.compareTo(orderItemRepresentation.getPrice())!= -1 ? discountMoney : orderItemRepresentation.getPrice();
             }
