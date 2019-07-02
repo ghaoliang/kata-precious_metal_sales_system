@@ -22,8 +22,8 @@ public class DiscountTest {
 		discountList.add("95折券");
 		discountList.add("9折券");
 		Discount discount = new Discount();
-		assertEquals("095",(discount.getDiscountList(discountList)).get(0));
-		assertEquals("090",(discount.getDiscountList(discountList)).get(1));
+		assertEquals("95折券",(discount.getDiscountList(discountList)).get(0));
+		assertEquals("9折券",(discount.getDiscountList(discountList)).get(1));
 	}
 	
 
