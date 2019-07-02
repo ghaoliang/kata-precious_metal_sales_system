@@ -14,6 +14,7 @@ import com.coding.sales.output.PaymentRepresentation;
 import com.coding.sales.service.BuyProductService;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -83,9 +84,11 @@ public class OrderApp {
         int memberPoints = member.getMemberPoint() + memberPointsIncreased;
         //获取消费后用户卡信息
         Card finalCardInfo = cardService.getCardInfoByPoint(memberPoints);
-
+        //格式化创建时间
+        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date createDate = dateFormat.parse(command.getCreateTime());
         //根据订单及付款信息构造打印实体类
-        result = new OrderRepresentation(command.getOrderId(),new Date(),member.getMemberId(),member.getMemberName(),member.getMemberLevel(),
+        result = new OrderRepresentation(command.getOrderId(),createDate,member.getMemberId(),member.getMemberName(),member.getMemberLevel(),
                 finalCardInfo.getCardType(),memberPointsIncreased,memberPoints,orderItems,totalPrice,discount,totalDiscountPrice,receivables,payments,discountCards);
 
 
