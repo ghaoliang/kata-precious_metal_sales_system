@@ -21,7 +21,7 @@ public class Product {
     /**
      * 价格
      */
-    private String price;
+    private double price;
     /**
      * 满减活动
      */
@@ -55,11 +55,11 @@ public class Product {
         this.units = units;
     }
 
-    public String getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
