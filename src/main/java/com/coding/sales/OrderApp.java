@@ -73,7 +73,7 @@ public class OrderApp {
         List<PaymentRepresentation> payments = orderService.getPaymentInfo(command.getPayments());
 
         //校验实际付款与应收金额是否一致
-        if(!receivables.equals(payments.get(0).getAmount())){
+        if(receivables.compareTo(payments.get(0).getAmount()) != 0){
             throw new Exception("实付金额与应收金额不匹配");
         }
 
