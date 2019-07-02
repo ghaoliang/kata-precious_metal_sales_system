@@ -29,9 +29,8 @@ public class CardService {
      * 根据客户级别获取卡信息
      * @param memberLevel
      * @return
-     * @throws Exception
      */
-    public Card getCardInfoByCardType(String memberLevel) throws Exception {
+    public Card getCardInfoByCardType(String memberLevel){
         if(CommonCard.equals(memberLevel)){
             return getCommonCardInfo();
         }else if(GoldCard.equals(memberLevel)){
