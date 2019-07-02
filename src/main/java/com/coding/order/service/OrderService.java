@@ -87,7 +87,9 @@ public class OrderService {
     		Product product = productService.getProductInfo(orderItemRepresentation.getProductNo());
     		//获取优惠金额
     		BigDecimal discountMoney = goodStartActivityService.getDiscountMoney(orderItemRepresentation,product,orderDiscountList);
-            discountItemList.add(new DiscountItemRepresentation(product.getProductId(),product.getProductName(),discountMoney));
+            if(discountMoney.compareTo(new BigDecimal(0)) ==1){
+                discountItemList.add(new DiscountItemRepresentation(product.getProductId(),product.getProductName(),discountMoney.setScale(2,BigDecimal.ROUND_HALF_EVEN)));
+            }
     	};
     	return discountItemList;
     }
