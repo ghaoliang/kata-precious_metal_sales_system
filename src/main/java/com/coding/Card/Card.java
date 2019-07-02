@@ -12,5 +12,21 @@ public class Card {
     /**
      * 积分基准倍数
      */
-    private String pointTimes;
+    private double pointTimes;
+
+    public String getCardType() {
+        return cardType;
+    }
+
+    public void setCardType(String cardType) {
+        this.cardType = cardType;
+    }
+
+    public double getPointTimes() {
+        return pointTimes;
+    }
+
+    public void setPointTimes(double pointTimes) {
+        this.pointTimes = pointTimes;
+    }
 }
