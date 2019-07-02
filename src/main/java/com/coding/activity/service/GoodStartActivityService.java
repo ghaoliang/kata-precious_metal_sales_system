@@ -34,7 +34,7 @@ public class GoodStartActivityService {
             discountMoney = orderItemRepresentation.getSubTotal().multiply(discountMap.get(product.getDiscount()));
         }
 
-        if(product.getFullPurchase() != null || product.getFullPurchase().length > 0){
+        if(product.getFullPurchase() != null && product.getFullPurchase().length > 0){
             BigDecimal fullPurchaseMoney = getDiscountMoneyByFullPurchase(orderItemRepresentation,product.getFullPurchase());
             discountMoney =  discountMoney.compareTo(fullPurchaseMoney) != -1 ? discountMoney : fullPurchaseMoney;
         }
