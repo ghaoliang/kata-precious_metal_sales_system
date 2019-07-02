@@ -83,6 +83,7 @@ public class OrderApp {
         //获取消费后用户卡信息
         Card finalCardInfo = cardService.getCardInfoByPoint(memberPoints);
 
+        //根据订单及付款信息构造打印实体类
         result = new OrderRepresentation(command.getOrderId(),new Date(),member.getMemberId(),member.getMemberName(),member.getMemberLevel(),
                 finalCardInfo.getCardType(),memberPointsIncreased,memberPoints,orderItems,totalPrice,discount,totalDiscountPrice,receivables,payments,discountCards);
 

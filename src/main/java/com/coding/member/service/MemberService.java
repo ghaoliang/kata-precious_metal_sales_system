@@ -9,6 +9,11 @@ import com.coding.utils.MemberFactory;
  */
 public class MemberService {
 
+    /**
+     * 根据用户卡号获取用户信息
+     * @param memberId
+     * @return
+     */
     public Member getMemberInfoByMemberId(String memberId){
         return MemberFactory.getMemberInfoByMemberId(memberId);
     }
