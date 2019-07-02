@@ -104,10 +104,20 @@ public class OrderService {
     	};
     	return null;
     }
-        
-    
-    public BigDecimal getOrderDiscountPrice(List<OrderItemRepresentation> orderItems) {
-        //TODO 计算优惠总金额
-        return null;
+
+    /**
+     * 获取优惠总金额
+     * @param discount
+     * @return
+     */
+    public BigDecimal getOrderDiscountPrice(List<DiscountItemRepresentation> discount) {
+        BigDecimal totalDiscountPrice = new BigDecimal(0);
+        if(discount == null || discount.size() == 0){
+            return totalDiscountPrice;
+        }
+        for(DiscountItemRepresentation discountItemRepresentation : discount){
+            totalDiscountPrice = totalDiscountPrice.add(discountItemRepresentation.getDiscount());
+        }
+        return totalDiscountPrice;
     }
 }
