@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.coding.utils.Constants;
+
 /**
  * 打折卷实体
  * @author yeyam
@@ -12,14 +14,14 @@ import java.util.Map;
  */
 public class Discount {
 	
-	public final static Map<String,Double> discountMap = new HashMap<String,Double>();
+	public final static Map<String,String> discountMap = new HashMap<String,String>();
 	static{
-		discountMap.put("95折券", 0.95);
-		discountMap.put("9折券", 0.90);
+		discountMap.put("95折券", Constants.DISCOUNT_95);
+		discountMap.put("9折券", Constants.DISCOUNT_9);
 	}
 	
-	public List<Double> getDiscountList(List<String> discountParam){
-		List<Double> discountList = new ArrayList<Double>();
+	public List<String> getDiscountList(List<String> discountParam){
+		List<String> discountList = new ArrayList<String>();
 		for(String discount:discountParam){
 			discountList.add(discountMap.get(discount));			
 		}
