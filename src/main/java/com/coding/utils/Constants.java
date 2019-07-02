@@ -32,9 +32,9 @@ public class Constants {
     /**
      * 可使用九折券
      */
-    public static final String DISCOUNT_9 = "090";
+    public static final String DISCOUNT_9 = "9折券";
     /**
      * 可使用九五折券
      */
-    public static final String DISCOUNT_95 = "095";
+    public static final String DISCOUNT_95 = "95折券";
 }

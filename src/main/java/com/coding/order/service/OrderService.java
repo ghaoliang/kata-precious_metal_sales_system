@@ -1,5 +1,6 @@
 package com.coding.order.service;
 
+import com.coding.activity.service.GoodStartActivityService;
 import com.coding.discount.Discount;
 import com.coding.product.Product;
 import com.coding.product.service.ProductService;
@@ -71,38 +72,24 @@ public class OrderService {
         }
         return paymentList;
     }
-    
-    public List<DiscountItemRepresentation> getDiscountItemList(List<OrderItemCommand> orderItemCommands,List<String> orderDiscountList){
+
+    /**
+     * 获取优惠列表清单
+     * @param orderItems
+     * @param orderDiscountList
+     * @return
+     */
+    public List<DiscountItemRepresentation> getDiscountItemList(List<OrderItemRepresentation> orderItems,List<String> orderDiscountList){
         ProductService productService = new ProductService();
+        GoodStartActivityService goodStartActivityService = new GoodStartActivityService();
         List<DiscountItemRepresentation> discountItemList = new ArrayList<DiscountItemRepresentation>();
-    	for(OrderItemCommand orderItemCommand:orderItemCommands){
-    		Product product = productService.getProductInfo(orderItemCommand.getProduct());
-    		String discount = product.getDiscount();
-    		String fullPurchase[] = product.getFullPurchase();
-    		Boolean is_discount = true;
-    		Boolean is_fullPurchase = true;
-    		DiscountItemRepresentation discountItem = null;
-    		List<String> discountList = null;
-    		Discount discount_entry = new Discount();
-    		if(discount == null || "".equals(discount)){
-    			is_discount = false;
-    		}else{    			
-    			discountList = discount_entry.getDiscountList(orderDiscountList);
-    		};
-    		if(fullPurchase == null || fullPurchase.length == 0){
-    			is_fullPurchase = false;
-    		};
-    		if(is_discount && !is_fullPurchase && discountList.contains(product.getDiscount())){
-    			BigDecimal discountMoney = product.getPrice().multiply(orderItemCommand.getAmount()).multiply(new BigDecimal(discountMap.get(product.getDiscount())));
-    		}else if(!is_discount && is_fullPurchase){
-    			
-    		}else if(is_discount && is_fullPurchase){
-    			
-    		}else{
-    			discountItem = new DiscountItemRepresentation(product.getProductId(), product.getProductName(), null);
-    		}
+    	for(OrderItemRepresentation orderItemRepresentation:orderItems){
+    		Product product = productService.getProductInfo(orderItemRepresentation.getProductNo());
+    		//获取优惠金额
+    		BigDecimal discountMoney = goodStartActivityService.getDiscountMoney(orderItemRepresentation,product,orderDiscountList);
+            discountItemList.add(new DiscountItemRepresentation(product.getProductId(),product.getProductName(),discountMoney));
     	};
-    	return null;
+    	return discountItemList;
     }
 
     /**
