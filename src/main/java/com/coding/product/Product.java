@@ -1,10 +1,13 @@
 package com.coding.product;
 
+import java.math.BigDecimal;
+
 /**
  * 贵金属产品实体类
  * @author ghaoliang
  */
 public class Product {
+
 
     /**
      * 产品名称
@@ -21,7 +24,7 @@ public class Product {
     /**
      * 价格
      */
-    private double price;
+    private BigDecimal price;
     /**
      * 满减活动
      */
@@ -55,11 +58,11 @@ public class Product {
         this.units = units;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 
@@ -76,6 +79,16 @@ public class Product {
     }
 
     public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+
+    public Product(String productName, String productId, String units, BigDecimal price, String[] fullPurchase, String discount) {
+        this.productName = productName;
+        this.productId = productId;
+        this.units = units;
+        this.price = price;
+        this.fullPurchase = fullPurchase;
         this.discount = discount;
     }
 }
