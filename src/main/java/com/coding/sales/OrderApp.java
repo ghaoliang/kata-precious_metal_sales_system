@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class OrderApp {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         if (args.length != 2) {
             throw new IllegalArgumentException("参数不正确。参数1为销售订单的JSON文件名，参数2为待打印销售凭证的文本文件名.");
         }
@@ -37,14 +37,14 @@ public class OrderApp {
         FileUtils.writeToFile(result, txtFileName);
     }
 
-    public String checkout(String orderCommand) {
+    public String checkout(String orderCommand) throws Exception {
         OrderCommand command = OrderCommand.from(orderCommand);
         OrderRepresentation result = checkout(command);
         
         return result.toString();
     }
 
-    OrderRepresentation checkout(OrderCommand command) {
+    OrderRepresentation checkout(OrderCommand command) throws Exception {
         OrderRepresentation result = null;
         MemberService memberService = new MemberService();
         CardService cardService = new CardService();
@@ -70,6 +70,11 @@ public class OrderApp {
         BigDecimal receivables = totalPrice.subtract(totalDiscountPrice);
         //获取付款记录
         List<PaymentRepresentation> payments = orderService.getPaymentInfo(command.getPayments());
+
+        //校验实际付款与应收金额是否一致
+        if(!receivables.equals(payments.get(0).getAmount())){
+            throw new Exception("实付金额与应收金额不匹配");
+        }
 
         //获取本次消费新增积分
         int memberPointsIncreased = buyProductService.getIncreasePointByProductAndCustLevel(member,receivables);
