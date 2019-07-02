@@ -10,6 +10,7 @@ import com.coding.sales.output.DiscountItemRepresentation;
 import com.coding.sales.output.OrderItemRepresentation;
 import com.coding.sales.output.OrderRepresentation;
 import com.coding.sales.output.PaymentRepresentation;
+import com.coding.sales.service.BuyProductService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -48,31 +49,34 @@ public class OrderApp {
         MemberService memberService = new MemberService();
         CardService cardService = new CardService();
         OrderService orderService = new OrderService();
+        BuyProductService buyProductService = new BuyProductService();
 
         //获取用户信息
         Member member = memberService.getMemberInfoByMemberId(command.getMemberId());
         //获取当前用户卡信息
         Card card = cardService.getCardInfoByCardType(member.getMemberLevel());
-        //获取本次消费新增积分
-        int memberPointsIncreased = 0;
-        //获取新增之后用户积分数
-        int memberPoints = 0;
-        //获取消费后用户卡信息
-        Card finalCardInfo = cardService.getCardInfoByPoint(memberPoints);
+
         //获取订单明细
         List<OrderItemRepresentation> orderItems =  orderService.getOrderDetailInfo(command.getItems());
         //获取订单总金额
         BigDecimal totalPrice = orderService.getOrderTotalPrice(orderItems);
         //获取优惠明细
         List<DiscountItemRepresentation> discount = new ArrayList<>();
+        //获取付款使用的打折券
+        List<String> discountCards = new ArrayList<>();
         //获取优惠总金额
         BigDecimal totalDiscountPrice = new BigDecimal(0);
         //获取应收金额
-        BigDecimal receivables = new BigDecimal(0);
+        BigDecimal receivables = totalPrice.subtract(totalDiscountPrice);
         //获取付款记录
-        List<PaymentRepresentation> payments = new ArrayList<>();
-        //获取付款使用的打折券
-        List<String> discountCards = new ArrayList<>();
+        List<PaymentRepresentation> payments = orderService.getPaymentInfo(command.getPayments());
+
+        //获取本次消费新增积分
+        int memberPointsIncreased = buyProductService.getIncreasePointByProductAndCustLevel(member,receivables);
+        //获取新增之后用户积分数
+        int memberPoints = member.getMemberPoint() + memberPointsIncreased;
+        //获取消费后用户卡信息
+        Card finalCardInfo = cardService.getCardInfoByPoint(memberPoints);
 
         result = new OrderRepresentation(command.getOrderId(),new Date(),member.getMemberId(),member.getMemberName(),member.getMemberLevel(),
                 finalCardInfo.getCardType(),memberPointsIncreased,memberPoints,orderItems,totalPrice,discount,totalDiscountPrice,receivables,payments,discountCards);

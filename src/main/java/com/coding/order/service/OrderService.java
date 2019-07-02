@@ -3,7 +3,9 @@ package com.coding.order.service;
 import com.coding.product.Product;
 import com.coding.product.service.ProductService;
 import com.coding.sales.input.OrderItemCommand;
+import com.coding.sales.input.PaymentCommand;
 import com.coding.sales.output.OrderItemRepresentation;
+import com.coding.sales.output.PaymentRepresentation;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -45,5 +47,22 @@ public class OrderService {
             totalPrice = totalPrice.add(orderItemRepresentation.getSubTotal());
         }
         return totalPrice;
+    }
+
+    /**
+     * 获取支付记录
+     * @param payments
+     * @return
+     */
+    public List<PaymentRepresentation> getPaymentInfo(List<PaymentCommand> payments) {
+        List<PaymentRepresentation> paymentList = new ArrayList<>();
+        if(payments == null || payments.size() == 0){
+            return  paymentList;
+        }
+        for(PaymentCommand paymentCommand : payments){
+            PaymentRepresentation paymentRepresentation = new PaymentRepresentation(paymentCommand.getType(),paymentCommand.getAmount());
+            paymentList.add(paymentRepresentation);
+        }
+        return paymentList;
     }
 }
