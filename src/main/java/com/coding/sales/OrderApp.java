@@ -2,6 +2,7 @@ package com.coding.sales;
 
 import com.coding.card.Card;
 import com.coding.card.service.CardService;
+import com.coding.discount.Discount;
 import com.coding.member.Member;
 import com.coding.member.service.MemberService;
 import com.coding.order.service.OrderService;
@@ -60,10 +61,10 @@ public class OrderApp {
         List<OrderItemRepresentation> orderItems =  orderService.getOrderDetailInfo(command.getItems());
         //获取订单总金额
         BigDecimal totalPrice = orderService.getOrderTotalPrice(orderItems);
-        //获取优惠明细
-        List<DiscountItemRepresentation> discount = new ArrayList<>();
         //获取付款使用的打折券
         List<String> discountCards = command.getDiscounts();
+        //获取优惠明细
+        List<DiscountItemRepresentation> discount = orderService.getDiscountItemList(orderItems,discountCards);
         //获取优惠总金额
         BigDecimal totalDiscountPrice = orderService.getOrderDiscountPrice(discount);
         //获取应收金额
