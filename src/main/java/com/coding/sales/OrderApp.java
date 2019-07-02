@@ -4,6 +4,7 @@ import com.coding.card.Card;
 import com.coding.card.service.CardService;
 import com.coding.member.Member;
 import com.coding.member.service.MemberService;
+import com.coding.order.service.OrderService;
 import com.coding.sales.input.OrderCommand;
 import com.coding.sales.output.DiscountItemRepresentation;
 import com.coding.sales.output.OrderItemRepresentation;
@@ -46,6 +47,7 @@ public class OrderApp {
         OrderRepresentation result = null;
         MemberService memberService = new MemberService();
         CardService cardService = new CardService();
+        OrderService orderService = new OrderService();
 
         //获取用户信息
         Member member = memberService.getMemberInfoByMemberId(command.getMemberId());
@@ -58,9 +60,9 @@ public class OrderApp {
         //获取消费后用户卡信息
         Card finalCardInfo = cardService.getCardInfoByPoint(memberPoints);
         //获取订单明细
-        List<OrderItemRepresentation> orderItems =  new ArrayList<>();
+        List<OrderItemRepresentation> orderItems =  orderService.getOrderDetailInfo(command.getItems());
         //获取订单总金额
-        BigDecimal totalPrice = new BigDecimal(0);
+        BigDecimal totalPrice = orderService.getOrderTotalPrice(orderItems);
         //获取优惠明细
         List<DiscountItemRepresentation> discount = new ArrayList<>();
         //获取优惠总金额
