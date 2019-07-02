@@ -1,5 +1,7 @@
 package com.coding.card.service;
 
+import java.math.BigDecimal;
+
 import com.coding.card.Card;
 
 /**
@@ -50,7 +52,7 @@ public class CardService {
      * @return
      * @throws Exception
      */
-    public Card getCardInfoByPoint(int point) throws Exception {
+    public Card getCardInfoByPoint(int point){
         if(point < CommonCardPoint){
             return getCommonCardInfo();
         }else if(point < GoldCardPoint){
@@ -69,7 +71,7 @@ public class CardService {
     private Card getCommonCardInfo(){
         Card card = new Card();
         card.setCardType("普卡");
-        card.setPointTimes(1);
+        card.setPointTimes(new BigDecimal(1));
         return card;
     }
 
@@ -80,7 +82,7 @@ public class CardService {
     private Card getGoldCardInfo(){
         Card card = new Card();
         card.setCardType("金卡");
-        card.setPointTimes(1.5);
+        card.setPointTimes(new BigDecimal(1.5));
         return card;
     }
 
@@ -91,7 +93,7 @@ public class CardService {
     private Card getPlatinumCardInfo(){
         Card card = new Card();
         card.setCardType("白金卡");
-        card.setPointTimes(1.8);
+        card.setPointTimes(new BigDecimal(1.8));
         return card;
     }
 
@@ -102,7 +104,7 @@ public class CardService {
     private Card getDiamondCardInfo(){
         Card card = new Card();
         card.setCardType("钻石卡");
-        card.setPointTimes(2);
+        card.setPointTimes(new BigDecimal(2));
         return card;
     }
 

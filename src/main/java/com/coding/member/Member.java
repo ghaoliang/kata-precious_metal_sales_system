@@ -1,5 +1,7 @@
 package com.coding.member;
 
+import java.math.BigDecimal;
+
 /**
  * 会员类
  */
@@ -11,7 +13,7 @@ public class Member {
     //会员卡号
     private String memberId;
     //会员积分
-    private String memberPoint;
+    private Integer memberPoint;
 
     public String getMemberName() {
         return memberName;
@@ -37,11 +39,12 @@ public class Member {
         this.memberId = memberId;
     }
 
-    public String getMemberPoint() {
-        return memberPoint;
-    }
+	public Integer getMemberPoint() {
+		return memberPoint;
+	}
 
-    public void setMemberPoint(String memberPoint) {
-        this.memberPoint = memberPoint;
-    }
+	public void setMemberPoint(Integer memberPoint) {
+		this.memberPoint = memberPoint;
+	}
+
 }

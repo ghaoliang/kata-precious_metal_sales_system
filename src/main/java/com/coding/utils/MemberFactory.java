@@ -37,7 +37,7 @@ public class MemberFactory {
         member.setMemberId("6236609999");
         member.setMemberLevel("普卡");
         member.setMemberName("马丁");
-        member.setMemberPoint("9860");
+        member.setMemberPoint(9860);
         return member;
     }
 
@@ -50,7 +50,7 @@ public class MemberFactory {
         member.setMemberId("6630009999");
         member.setMemberLevel("金卡");
         member.setMemberName("王立");
-        member.setMemberPoint("48860");
+        member.setMemberPoint(48860);
         return member;
     }
 
@@ -63,7 +63,7 @@ public class MemberFactory {
         member.setMemberId("8230009999");
         member.setMemberLevel("白金卡");
         member.setMemberName("李想");
-        member.setMemberPoint("98860");
+        member.setMemberPoint(98860);
         return member;
     }
 
@@ -76,7 +76,7 @@ public class MemberFactory {
         member.setMemberId("9230009999");
         member.setMemberLevel("钻石卡");
         member.setMemberName("张三");
-        member.setMemberPoint("198860");
+        member.setMemberPoint(198860);
         return member;
     }
 

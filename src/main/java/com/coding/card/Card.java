@@ -1,5 +1,7 @@
 package com.coding.card;
 
+import java.math.BigDecimal;
+
 /**
  * 卡信息实体类
  * @author gaohaoliang
@@ -12,7 +14,7 @@ public class Card {
     /**
      * 积分基准倍数
      */
-    private double pointTimes;
+    private BigDecimal pointTimes;
 
     public String getCardType() {
         return cardType;
@@ -22,11 +24,12 @@ public class Card {
         this.cardType = cardType;
     }
 
-    public double getPointTimes() {
-        return pointTimes;
-    }
+	public BigDecimal getPointTimes() {
+		return pointTimes;
+	}
 
-    public void setPointTimes(double pointTimes) {
-        this.pointTimes = pointTimes;
-    }
+	public void setPointTimes(BigDecimal pointTimes) {
+		this.pointTimes = pointTimes;
+	}
+
 }
