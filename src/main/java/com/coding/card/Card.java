@@ -1,4 +1,4 @@
-package com.coding.Card;
+package com.coding.card;
 
 /**
  * 卡信息实体类

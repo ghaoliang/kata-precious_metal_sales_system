@@ -1,6 +1,6 @@
-package com.coding.Card.Service;
+package com.coding.card.service;
 
-import com.coding.Card.Card;
+import com.coding.card.Card;
 
 /**
  * 卡信息服务类
