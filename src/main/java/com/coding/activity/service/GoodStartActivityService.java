@@ -31,7 +31,7 @@ public class GoodStartActivityService {
     public BigDecimal getDiscountMoney(OrderItemRepresentation orderItemRepresentation, Product product, List<String> discountList){
         BigDecimal discountMoney = new BigDecimal(0);
         if(discountList.contains(product.getDiscount())){
-            discountMoney = orderItemRepresentation.getSubTotal().multiply(discountMap.get(product.getDiscount()));
+            discountMoney = orderItemRepresentation.getSubTotal().multiply(new BigDecimal(1).subtract(discountMap.get(product.getDiscount())));
         }
 
         if(product.getFullPurchase() != null && product.getFullPurchase().length > 0){
